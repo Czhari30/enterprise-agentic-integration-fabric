@@ -1,0 +1,51 @@
+name: enterprise-agentic-fabric
+
+services:
+  fabric:
+    build: .
+    ports:
+      - "8080:8080"
+    environment:
+      FABRIC_DB_PATH: /data/fabric.db
+      OTEL_SERVICE_NAME: enterprise-agentic-fabric
+      OTEL_EXPORTER_OTLP_ENDPOINT: http://otel-collector:4317
+      OTEL_EXPORTER_OTLP_PROTOCOL: grpc
+      OTEL_TRACES_EXPORTER: otlp
+      OTEL_METRICS_EXPORTER: none
+    volumes:
+      - fabric-data:/data
+    depends_on:
+      - otel-collector
+    read_only: true
+    tmpfs:
+      - /tmp
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+
+  otel-collector:
+    image: otel/opentelemetry-collector-contrib:0.137.0
+    command: ["--config=/etc/otelcol/config.yaml"]
+    volumes:
+      - ./deploy/observability/otel-collector.yaml:/etc/otelcol/config.yaml:ro
+    depends_on:
+      - jaeger
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+
+  jaeger:
+    image: jaegertracing/jaeger:2.10.0
+    ports:
+      - "16686:16686"
+    environment:
+      COLLECTOR_OTLP_ENABLED: "true"
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+
+volumes:
+  fabric-data:

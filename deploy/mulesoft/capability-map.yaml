@@ -1,0 +1,19 @@
+# Conceptual mapping only; this is not a deployable MuleSoft asset.
+agent_network:
+  name: enterprise-integration-fabric
+  capabilities:
+    discover:
+      assets: [payments-api, integration-trace-api, synthetic-kyc-api]
+      project_equivalent: enterprise_fabric.connectors.ToolRegistry
+    govern:
+      runtime_controls: [authentication, authorization, rate-limit, cost-limit, audit]
+      project_equivalent: enterprise_fabric.policy.PolicyEngine
+    orchestrate:
+      brokers: [bounded-planner]
+      agents: [knowledge-agent, integration-investigator, workflow-operator, verifier]
+      protocols: [MCP-style-tools, A2A-ready-boundaries]
+    observe:
+      telemetry: [OpenTelemetry, workflow-journal, redacted-tool-events]
+  bridges:
+    existing_api_contract: contracts/payments.openapi.yaml
+    mcp_exposure: enterprise_fabric.mcp_server

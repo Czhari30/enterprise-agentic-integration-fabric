@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Governed enterprise agentic workflow control plane demo" />
+    <title>Enterprise Agentic Integration Fabric</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body>
+    <div class="shell">
+      <aside class="sidebar">
+        <div class="brand-mark">EAF</div>
+        <div>
+          <strong>Control Fabric</strong>
+          <span>Enterprise AI Operations</span>
+        </div>
+        <nav aria-label="Primary">
+          <a class="active" href="#mission">Mission Control</a>
+          <a href="#trace">Execution Trace</a>
+          <a href="#evidence">Evidence</a>
+          <a href="/docs">API Contract</a>
+        </nav>
+        <div class="sidebar-note">
+          <span class="status-dot"></span>
+          Synthetic sandbox · healthy
+        </div>
+      </aside>
+
+      <main>
+        <header>
+          <div>
+            <p class="eyebrow">GOVERNED AGENT NETWORK</p>
+            <h1>Mission Control</h1>
+          </div>
+          <div class="trust-pill">Policy enforcement active</div>
+        </header>
+
+        <section class="hero-grid" id="mission">
+          <article class="panel request-panel">
+            <div class="panel-heading">
+              <div>
+                <p class="eyebrow">NEW WORKFLOW</p>
+                <h2>Investigate an integration case</h2>
+              </div>
+              <span class="tag">Maker</span>
+            </div>
+            <label for="intent">Operator intent</label>
+            <textarea id="intent" rows="5">Investigate the payment timeout, correlate the integration trace, and safely replay the message.</textarea>
+            <div class="field-row">
+              <label>Amount<input id="amount" type="number" value="25000" /></label>
+              <label>Currency<input id="currency" value="MYR" maxlength="3" /></label>
+            </div>
+            <button id="run">Run governed workflow <span>→</span></button>
+            <p class="helper">A high-impact step pauses for independent approval.</p>
+          </article>
+
+          <article class="panel posture-panel">
+            <div class="panel-heading">
+              <div>
+                <p class="eyebrow">CONTROL POSTURE</p>
+                <h2>Runtime safeguards</h2>
+              </div>
+              <span class="pulse"></span>
+            </div>
+            <div class="posture-list">
+              <div><span>Tenant boundary</span><strong>Enforced</strong></div>
+              <div><span>Tool allow-list</span><strong>5 registered</strong></div>
+              <div><span>PII telemetry</span><strong>Redacted</strong></div>
+              <div><span>Maker-checker</span><strong>Required</strong></div>
+              <div><span>Evidence citations</span><strong>Verified</strong></div>
+            </div>
+          </article>
+        </section>
+
+        <section class="panel result-panel" aria-live="polite">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">LIVE CASE</p>
+              <h2 id="workflow-title">Ready for a workflow</h2>
+            </div>
+            <span id="workflow-status" class="status-badge idle">IDLE</span>
+          </div>
+          <div id="empty-state" class="empty-state">
+            Launch the sample case to see planning, retrieval, policy decisions and tool traces.
+          </div>
+          <div id="workflow-view" class="hidden">
+            <div class="metric-grid">
+              <div><span>Evidence</span><strong id="evidence-count">0</strong></div>
+              <div><span>Planned tools</span><strong id="tool-count">0</strong></div>
+              <div><span>Policy checks</span><strong id="policy-count">0</strong></div>
+              <div><span>Audit events</span><strong id="event-count">0</strong></div>
+            </div>
+            <div class="content-grid">
+              <div id="trace">
+                <h3>Execution trace</h3>
+                <ol id="timeline" class="timeline"></ol>
+              </div>
+              <div id="evidence">
+                <h3>Retrieved evidence</h3>
+                <div id="evidence-list"></div>
+              </div>
+            </div>
+            <button id="approve" class="approve hidden">Approve as independent checker</button>
+          </div>
+        </section>
+      </main>
+    </div>
+    <script src="/static/app.js" defer></script>
+  </body>
+</html>

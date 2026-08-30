@@ -1,0 +1,36 @@
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "enterprise-agentic-integration-fabric"
+version = "0.1.0"
+description = "Governed agentic AI control plane for enterprise integration workflows"
+readme = "README.md"
+requires-python = ">=3.11"
+license = {text = "MIT"}
+authors = [{name = "Mohanahari Mohan"}]
+dependencies = [
+  "fastapi>=0.115,<1.0",
+  "pydantic>=2.8,<3.0",
+  "uvicorn[standard]>=0.30,<1.0",
+  "opentelemetry-distro>=0.50b0,<1.0",
+  "opentelemetry-exporter-otlp>=1.29,<2.0",
+]
+
+[project.optional-dependencies]
+mcp = ["mcp>=1.15,<2.0"]
+dev = ["pytest>=8.0,<9.0", "ruff>=0.8,<1.0", "httpx>=0.27,<1.0"]
+
+[tool.setuptools]
+packages = ["enterprise_fabric"]
+
+[tool.setuptools.package-data]
+enterprise_fabric = ["static/*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"

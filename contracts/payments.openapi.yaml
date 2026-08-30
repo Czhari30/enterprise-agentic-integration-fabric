@@ -1,0 +1,64 @@
+openapi: 3.1.0
+info:
+  title: Synthetic Payment Operations API
+  version: 1.0.0
+  description: >-
+    A deliberately synthetic contract showing how an existing system API can be
+    exposed through an API-led connector or bridged into a governed agent tool.
+servers:
+  - url: https://sandbox.example.invalid/payments
+paths:
+  /v1/payments/{paymentRef}:
+    get:
+      operationId: getPaymentStatus
+      summary: Read a synthetic payment status
+      parameters:
+        - in: path
+          name: paymentRef
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Payment status
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PaymentStatus"
+  /v1/payments/{paymentRef}/release-hold:
+    post:
+      operationId: releasePaymentHold
+      summary: Release a synthetic hold after approval
+      parameters:
+        - in: path
+          name: paymentRef
+          required: true
+          schema:
+            type: string
+        - in: header
+          name: Idempotency-Key
+          required: true
+          schema:
+            type: string
+        - in: header
+          name: X-Approval-Reference
+          required: true
+          schema:
+            type: string
+      responses:
+        "202":
+          description: Accepted for sandbox execution
+components:
+  schemas:
+    PaymentStatus:
+      type: object
+      required: [paymentRef, status, synthetic]
+      properties:
+        paymentRef:
+          type: string
+        status:
+          type: string
+          enum: [pending, confirmed, failed, held]
+        synthetic:
+          type: boolean
+          const: true

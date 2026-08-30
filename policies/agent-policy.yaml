@@ -1,0 +1,43 @@
+version: "1.0"
+policy_set: regulated-enterprise-default
+
+identity:
+  tenant_context_required: true
+  maker_checker_separation: true
+  default_deny: true
+
+retrieval:
+  enforce_tenant_filter: true
+  enforce_clearance: true
+  citations_required: true
+  maximum_documents: 4
+
+model:
+  temperature: 0
+  structured_output_required: true
+  model_may_execute_tools: false
+  redact_prompt_telemetry: true
+
+actions:
+  approval_thresholds:
+    MYR: 10000
+  require_approval_for_risk: [high, critical]
+  require_idempotency_for_mutations: true
+  compensation_required_for_mutations: true
+
+tools:
+  - name: payments.lookup
+    required_scope: payments:read
+    risk: low
+  - name: integration.trace
+    required_scope: integration:read
+    risk: low
+  - name: customers.kyc_summary
+    required_scope: customers:restricted:read
+    risk: high
+  - name: integration.replay_message
+    required_scope: integration:write
+    risk: high
+  - name: payments.release_hold
+    required_scope: payments:write
+    risk: critical
